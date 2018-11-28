@@ -1,0 +1,36 @@
+{
+    "name": "kibb/kibb-backup",
+    "description": "Database and file backup",
+    "type": "library",
+    "require": {
+        "php" : "^7.1",
+        "league/flysystem": "^1.0",
+        "laravel/framework": "~5.5.0|~5.6.0|~5.7.0",
+        "symfony/finder": "^3.3|^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3",
+        "orchestra/testbench" : "~3.5.0|~3.6.0|~3.7.0",
+        "mockery/mockery": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Akeeb Ismail",
+            "email": "ismailakeeb@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Kibb\\Backup\\": "src"
+        },
+        "files": [
+            "src/Helpers/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kibb\\Backup\\Test\\": "tests"
+        }
+    }
+}
