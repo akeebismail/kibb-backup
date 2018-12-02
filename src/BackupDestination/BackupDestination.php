@@ -12,6 +12,7 @@ namespace Kibb\Backup\BackupDestination;
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Carbon\Carbon;
+use Kibb\Backup\Exceptions\InvalidBackupDestination;
 
 class BackupDestination
 {
