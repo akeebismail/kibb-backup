@@ -201,7 +201,6 @@ class MySql extends DbDumper
         foreach (['userName','dbName','host'] as $requiredProperty) {
             if (strlen($this->$requiredProperty) === 0){
                 throw CannotStartDump::emptyParameter($requiredProperty);
-
             }
         }
     }
