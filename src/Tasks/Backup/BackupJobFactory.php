@@ -9,7 +9,7 @@
 namespace Kibb\Backup\Tasks\Backup;
 
 
-
+use Illuminate\Support\Collection;
 use Kibb\Backup\BackupDestination\BackupDestinationFactory;
 
 class BackupJobFactory
@@ -18,8 +18,8 @@ class BackupJobFactory
     public static function createFromArray(array $config): BackupJob
     {
         return (new BackupJob())
-            ->setFileSelection()
-            ->setDbDumpers()
+            ->setFileSelection(static::createFileSelection($config['backup']['source']['files']))
+            ->setDbDumpers(static::createDbDumpers($config['backup']['source']['databases']))
             ->setBackupDestinations(BackupDestinationFactory::createFromArray($config['backup']));
     }
 
@@ -28,5 +28,13 @@ class BackupJobFactory
         return FileSelection::create($sourceFiles['include'])
             ->excludeFilesFrom($sourceFiles['exclude'])
             ->shouldFollowLinks(isset($sourceFiles['followLinks']) && $sourceFiles['followLinks']);
+    }
+
+    protected static function createDbDumpers(array $dbConnectionNames): Collection
+    {
+        return collect($dbConnectionNames)->
+            mapWithKeys(function (string $dbConnectionName){
+                return [$dbConnectionName => DbDumperFactory::createFromConnection($dbConnectionName)];
+        });
     }
 }
