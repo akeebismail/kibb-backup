@@ -39,6 +39,10 @@ class BackupJob
 
     public function __construct()
     {
+        $this->dontBackupFilesystem();
+        $this->dontBackupDatabases();
+        $this->setDefaultFilename();
+
         $this->backupDestinations = new Collection();
     }
 
